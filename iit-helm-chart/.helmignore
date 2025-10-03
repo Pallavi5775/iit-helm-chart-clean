@@ -1,23 +1,14 @@
-# Ignore Git
-.git/
-.github/
+.git
+.gitignore
 docs/
 *.tgz
-
-# Python junk
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-env/
-venv/
-*.egg-info
-
-# Node / Frontend junk
-node_modules/
-dist/
-build/
-
-# OS files
 .DS_Store
 Thumbs.db
+*.log
+*.tmp
+.env
+*.env
+__pycache__/
+*.pyc
+.venv/
+venv/
