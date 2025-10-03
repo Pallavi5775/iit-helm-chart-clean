@@ -27,8 +27,8 @@ jobs:
           mkdir -p docs
           helm package iit-helm-chart -d docs
 
-          OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
-          REPO=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
+          OWNER=$(echo "${{ github.repository_owner }}")
+          REPO=$(echo "${{ github.event.repository.name }}")
 
           helm repo index docs --url https://${OWNER}.github.io/${REPO}
 
