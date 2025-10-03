@@ -6,3 +6,20 @@ helm repo add iit https://pallavi5775.github.io/iit-helm-chart
 helm repo update
 helm install iit iit/iit-stack -n iit --create-namespace
 
+
+
+apiVersion: v1
+entries:
+  iit-stack:
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2025-10-03T21:49:05.3985624+05:30"
+    description: Helm chart for Investigation Investment Tool (iiT) ingestion stack
+    digest: 5dcdf0b28277a148166b42deb101110aa92fbc8fa76097347a291208d6265cf2
+    name: iit-stack
+    type: application
+    urls:
+    - https://pallavi5775.github.io/iit-helm-chart/iit-stack-0.1.0.tgz
+    version: 0.1.0
+generated: "2025-10-03T21:49:05.2048053+05:30"
+
