@@ -1,17 +1,24 @@
-# Exclude git and CI stuff
+# Ignore Git
 .git/
 .github/
 docs/
 *.tgz
 
-# Python / Node junk
+# Python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+env/
+venv/
+*.egg-info
+
+# Node / Frontend
 node_modules/
 dist/
 build/
-venv/
 
-# OS files
+# OS junk
 .DS_Store
 Thumbs.db
+
