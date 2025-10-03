@@ -4,7 +4,7 @@
 docs/
 *.tgz
 
-# Python
+# Python junk
 __pycache__/
 *.pyc
 *.pyo
@@ -13,12 +13,11 @@ env/
 venv/
 *.egg-info
 
-# Node / Frontend
+# Node / Frontend junk
 node_modules/
 dist/
 build/
 
-# OS junk
+# OS files
 .DS_Store
 Thumbs.db
-
