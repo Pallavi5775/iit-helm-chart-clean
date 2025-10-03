@@ -3,6 +3,8 @@
 Use `helm install iit ./` with values overridden as needed.
 
 
-helm repo add iit https://pallavi5775.github.io/iit-helm-charts
+helm repo remove iit
+helm repo add iit https://Pallavi5775.github.io/iit-helm-charts
 helm repo update
+
 helm install iit iit/iit-stack -n iit --create-namespace
