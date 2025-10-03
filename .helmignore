@@ -1,0 +1,17 @@
+# Exclude git and CI stuff
+.git/
+.github/
+docs/
+*.tgz
+
+# Python / Node junk
+__pycache__/
+*.pyc
+node_modules/
+dist/
+build/
+venv/
+
+# OS files
+.DS_Store
+Thumbs.db
