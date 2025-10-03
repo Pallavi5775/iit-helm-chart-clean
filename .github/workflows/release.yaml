@@ -8,9 +8,8 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-
     permissions:
-      contents: write   # allow workflow to push to repo
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -26,9 +25,8 @@ jobs:
       - name: Package Helm chart
         run: |
           mkdir -p docs
-          helm package . -d docs
+          helm package iit-helm-chart -d docs
 
-          # force lowercase owner + repo for GitHub Pages URL
           OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
           REPO=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
 
