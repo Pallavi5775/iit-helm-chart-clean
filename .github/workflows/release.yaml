@@ -21,7 +21,9 @@ jobs:
       - name: Package Helm chart
         run: |
           mkdir -p docs
-          helm package iit-helm-chart -d docs
+          # package chart from repo root (where Chart.yaml is located)
+          helm package . -d docs
+          # regenerate repo index with GitHub Pages URL
           helm repo index docs --url https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
 
       - name: Commit and push chart repo updates
