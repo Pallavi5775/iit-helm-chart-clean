@@ -1,41 +1,45 @@
-# Default values for iiT Helm chart.
-replicaCount: 2
-
-image:
-  registry: <YOUR_REGISTRY>
-  pullPolicy: IfNotPresent
-  yfinance: yfinance-service:latest
-  alphavantage: alphavantage-service:latest
-  mongo: mongo:6.0
-  prefectAgent: prefecthq/prefect:2.14.10-python3.11
+global:
+  namespace: connector-services
+  imagePullPolicy: IfNotPresent
+  replicas: 1
 
 mongo:
-  persistence:
-    enabled: true
-    storageClass: standard
-    size: 100Gi
-  rootUser: mongo_admin
-  rootPassword: change_me_password
+  image: mongo:6.0
+  storage: 1Gi
+  username: pallavidapriya75_db_user
+  password: h4bkjpuGqfUaoNbx
+  database: iiT_data_fetcher
+
+yfinance:
+  image:
+    repository: ghcr.io/pallavi5775/yfinance_service
+    tag: latest
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "500m"
+      memory: "256Mi"
 
 alphavantage:
-  apiKey: REPLACE_WITH_REAL_API_KEY
-
-resources:
-  connectors:
+  image:
+    repository: ghcr.io/pallavi5775/alphavantage_service
+    tag: latest
+  resources:
     requests:
-      cpu: "250m"
-      memory: "512Mi"
+      cpu: "100m"
+      memory: "128Mi"
     limits:
-      cpu: "1000m"
-      memory: "1Gi"
+      cpu: "500m"
+      memory: "256Mi"
 
 prefect:
-  apiKey: REPLACE_WITH_PREFECT_API_KEY
-  apiUrl: https://api.prefect.cloud
-
-namespace: iit
-
-symbols:
-  - AAPL
-  - MSFT
-  - GOOG
+  image: prefecthq/prefect:2.14.10-python3.11
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "500m"
+      memory: "256Mi"

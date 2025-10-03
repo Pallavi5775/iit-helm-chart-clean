@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: prefect-agent
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Values.global.namespace }}
 spec:
   replicas: 1
   selector:
@@ -13,23 +13,9 @@ spec:
       labels:
         app: prefect-agent
     spec:
-      serviceAccountName: prefect-agent-sa
+      serviceAccountName: prefect-agent
       containers:
-        - name: prefect-agent
-          image: {{ .Values.image.prefectAgent }}
-          command: ["prefect", "agent", "kubernetes", "start"]
-          env:
-            - name: PREFECT_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: iit-secrets
-                  key: PREFECT_API_KEY
-            - name: PREFECT_API_URL
-              value: "{{ .Values.prefect.apiUrl }}"
-          resources:
-            requests:
-              cpu: "200m"
-              memory: "256Mi"
-            limits:
-              cpu: "500m"
-              memory: "512Mi"
+      - name: prefect-agent
+        image: {{ .Values.prefect.image }}
+        resources:
+          {{- toYaml .Values.prefect.resources | nindent 10 }}

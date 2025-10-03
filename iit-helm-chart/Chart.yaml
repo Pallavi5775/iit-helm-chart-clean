@@ -1,6 +1,6 @@
 apiVersion: v2
 name: iit-stack
-description: Helm chart for Investigation Investment Tool (iiT) ingestion stack
+description: Umbrella Helm Chart for Investment Ingestion Tool
 type: application
 version: 0.1.1
-appVersion: "1.1"
+appVersion: "1.0"
