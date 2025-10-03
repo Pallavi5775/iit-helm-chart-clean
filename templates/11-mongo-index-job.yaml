@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo-index-scripts
+  namespace: {{ .Values.namespace }}
+data:
+  create_index.py: |
+    from pymongo import MongoClient
+    import os
+    uri = os.environ.get("MONGO_URI", "mongodb://mongo:27017")
+    dbname = os.environ.get("MONGO_DB", "{{ .Values.namespace }}")
+    client = MongoClient(uri)
+    db = client[dbname]
+    print("Creating unique index on market_data(symbol, datetime, metadata.source)")
+    db.market_data.create_index(
+      [("symbol", 1), ("datetime", 1), ("metadata.source", 1)],
+      unique=True,
+      name="uq_symbol_datetime_source"
+    )
+    print("Index created or already exists")
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: mongo-create-index
+  namespace: {{ .Values.namespace }}
+spec:
+  template:
+    spec:
+      containers:
+        - name: create-index
+          image: python:3.11-slim
+          command: ["python", "/scripts/create_index.py"]
+          env:
+            - name: MONGO_URI
+              value: "mongodb://mongo:27017"
+            - name: MONGO_DB
+              value: "{{ .Values.namespace }}"
+          volumeMounts:
+            - name: scripts
+              mountPath: /scripts
+      restartPolicy: OnFailure
+      volumes:
+        - name: scripts
+          configMap:
+            name: mongo-index-scripts
