@@ -3,7 +3,7 @@ entries:
   iit-stack:
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2025-10-03T21:20:02.2440139+05:30"
+    created: "2025-10-03T21:23:06.7595804+05:30"
     description: Helm chart for Investigation Investment Tool (iiT) ingestion stack
     digest: ba2b269dbc9e6f5301b380c12302219523ed040d37f1bd743e93d356101f3e14
     name: iit-stack
@@ -11,4 +11,4 @@ entries:
     urls:
     - https://pallavi5775.github.io/iit-helm-chart/iit-stack-0.1.0.tgz
     version: 0.1.0
-generated: "2025-10-03T21:20:02.1874729+05:30"
+generated: "2025-10-03T21:23:06.7265677+05:30"
