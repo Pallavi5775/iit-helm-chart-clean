@@ -9,6 +9,6 @@ entries:
     name: iit-stack
     type: application
     urls:
-    - https://github.com/Pallavi5775/iit-helm-charts.git/iit-stack-0.1.0.tgz
+    - https://Pallavi5775.github.io/iit-helm-charts/iit-stack-0.1.0.tgz
     version: 0.1.0
 generated: "2025-10-03T16:02:28.8197427+05:30"
