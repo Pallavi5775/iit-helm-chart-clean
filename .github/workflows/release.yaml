@@ -3,27 +3,30 @@ name: Release Helm Chart
 on:
   push:
     branches:
-      - main   # run workflow whenever code is pushed to main branch
+      - main
 
 jobs:
   release:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write   # ✅ allow pushing back to repo
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}   # ✅ use GitHub token to authenticate
 
       - name: Set up Helm
         uses: azure/setup-helm@v3
         with:
-          version: v3.14.4   # specific Helm version, adjust if needed
+          version: v3.14.4
 
       - name: Package Helm chart
         run: |
           mkdir -p docs
-          # package chart from repo root (where Chart.yaml is located)
           helm package . -d docs
-          # regenerate repo index with GitHub Pages URL
           helm repo index docs --url https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
 
       - name: Commit and push chart repo updates
@@ -32,4 +35,4 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add docs
           git commit -m "Update Helm chart repo" || echo "No changes to commit"
-          git push
+          git push origin HEAD:main
